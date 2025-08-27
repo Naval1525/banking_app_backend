@@ -4,6 +4,10 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.JWT_SECRET as string;
 const JWT_EXPIRES_IN: string = process.env.JWT_EXPIRES_IN || "7d";
 
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET must be defined");
+}
+
 export const hashPassword = (password: string): Promise<string> => {
   return bcrypt.hash(password, 12);
 };
