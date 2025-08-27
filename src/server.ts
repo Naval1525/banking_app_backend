@@ -7,6 +7,7 @@ import morgan from "morgan";
 
 import userRoutes from "./routes/user.routes";
 import accountRoutes from './routes/account.routes'
+import transactionRoutes from './routes/transaction.routes'
 
 const app = express();
 const PORT = process.env.PORT || "8000";
@@ -22,8 +23,9 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
-app.use("/api/users", userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/accounts', accountRoutes)
+app.use('/api/transactions', transactionRoutes)
 
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
